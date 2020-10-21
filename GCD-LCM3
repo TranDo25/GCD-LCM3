@@ -1,0 +1,58 @@
+#include <iostream>
+#include <vector>
+#define MODULO 1000000007
+using namespace std;
+typedef unsigned long long ull;
+int GCD(int a, int b){
+	while(a!=b){
+		if(a>b) a-=b;
+		else b-=a;
+	}
+	return a;
+}
+//int GCD(int a, int b){
+//	int r = 1;
+//	while (r)
+//	{
+//		r = a % b;
+//		a = b;
+//		b = r;
+//	}
+//	return a;
+//}
+
+void FUCK()
+{
+	ull N, inp;
+	vector<ull> vec_inp;
+	cin >> N;
+	for (ull i = 0; i < N; ++i)
+	{
+		cin >> inp;
+		vec_inp.push_back(inp);
+	}
+
+	ull all_gcd = vec_inp[0];
+	for (ull i = 1; i < N; ++i) 		
+		all_gcd = GCD(all_gcd, vec_inp[i]);
+
+	ull all_mul = vec_inp[0];
+	for (ull i = 1; i < N; ++i) 	
+		all_mul = (all_mul*vec_inp[i])%MODULO;
+
+	ull res = all_mul;
+	for (ull i = 1; i < all_gcd; ++i) {
+			res = (res*all_mul);
+		res%=MODULO;
+	}
+	
+	cout << res << '\n';
+}
+
+int main() 
+{
+	int T;
+	cin >> T;
+	for (;T;--T)
+		FUCK();
+}
